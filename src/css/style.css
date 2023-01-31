@@ -120,7 +120,7 @@ body {
     height: 10px;
     background: rgba(0, 0, 0, 0.562);
     margin-bottom: 5px;
-    bottom: -38px;
+    bottom: -21px;
 }
 
 .progressBar__progress::-moz-range-thumb {

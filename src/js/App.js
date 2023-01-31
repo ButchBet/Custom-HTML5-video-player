@@ -5,7 +5,7 @@ const downControls = document.getElementById("downControls");
 let id = null; // Interval used to show and hidde videoControls
 let checkMovement = false; // Boolean to check if the mouse is being moved or not 
 let hidde = null; // Timeout to hidde the videoControl
-let pos = (-32); // This will help us to move the videoControls naturally
+let pos = (-21); // This will help us to move the videoControls naturally
 
 videoContainer.addEventListener("mouseenter", showControls);
 
@@ -55,7 +55,7 @@ function hiddeControls() {
     id = setInterval(frame, 1);
 
     function frame() {
-        if(pos == -32) {
+        if(pos == -21) {
             clearInterval(id);
         } else {
             pos--;
