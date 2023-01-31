@@ -9,19 +9,21 @@
 
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" type="image/x-icon">
     <link rel="stylesheet" href="./src/css/style.css">
-    <link rel="stylesheet" href="./src/css/tablet.css" media="(min-width: 320px)">
-    <link rel="stylesheet" href="./src/css/desktop.css" media="(min-width: 678px)">
+    <link rel="stylesheet" href="./src/css/tablet.css" media="(min-width: 310px)">
+    <link rel="stylesheet" href="./src/css/desktop.css" media="(min-width: 599px)">
 
     <script src="./src/js/App.js" defer type="module"></script>
 </head>
 <body>
-    <div class="videoContainer">
+    <div class="videoContainer" id="videoContainer">
         <video src="./src/assets/videoplayback.mp4" class="videoContainer__video"></video>
 
-        <div class="videoControls">
-            <input type="range" name="progress" id="progress" class="videoControls__progress">
+        <div class="videoControls" id="videoControls">
+            <div class="progressBar no-margin">
+                <input type="range" name="progress" id="progress" class="progressBar__progress">
+            </div>
 
-            <div class="downControls">
+            <div class="downControls" id="downControls">
                 <img src="./src/assets/play.png" alt="Play button" class="downControls__pausePlay">
 
                 <div class="volumeSpeed">
@@ -30,11 +32,11 @@
                     <input type="range" name="speed" id="speed" class="volumeSpeed__speed">
                 </div>
 
-                <img src="./src/assets/volume-up.png" alt="Volume up button" class="downControls__volume">
+                <!-- <img src="./src/assets/volume-up.png" alt="Volume up button" class="downControls__volume"> -->
 
                 <div class="skip">
                     <div class="skipConainer">
-                        <img src="./src/assets/left-arrow.png" alt="Skip left button" class="skipConainer__left">
+                        <img src="./src/assets/arrowheads-left.png" alt="Skip left button" class="skipConainer__left">
 
                         <p class="skipConainer__seconds">10s</p>
                     </div>
@@ -42,7 +44,7 @@
                     <div class="skipConainer">
                         <p class="skipConainer__seconds">10s</p>
 
-                        <img src="./src/assets/right-arrow.png" alt="Skip right button" class="skipConainer__right">
+                        <img src="./src/assets/arrowheads-right.png" alt="Skip right button" class="skipConainer__right">
                     </div>
                 </div>
             </div>
