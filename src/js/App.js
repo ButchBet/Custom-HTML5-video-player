@@ -2,6 +2,9 @@ const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
 const pausePlayButton = document.getElementById("pausePlayButton");
 const videoScreen = document.getElementById("videoScreen");
+const volumeRange = document.getElementById("volumeRange");
+const speedRange = document.getElementById("speedRange");
+console.log(videoScreen ,speedRange)
 
 // Code to animate the show and hidde of the videoControls
 let id = null; // Interval used to show and hidde videoControls
@@ -96,8 +99,7 @@ function checkMosueMovements() {
 pausePlayButton.addEventListener("click", changeVideoStatus);
 
 // Function to change the video status from pause to play and vice versa, also to change the src and alt attributes of the pausePlayButton
-function changeVideoStatus(e) {
-    console.log(videoScreen);
+function changeVideoStatus() {
     if(videoScreen.paused) {
         pausePlayButton.src = "./src/assets/pause.png";
 
@@ -112,3 +114,22 @@ function changeVideoStatus(e) {
         videoScreen.pause();
     }
 }
+
+// Coude to add the change of the volume and speed correctly with the volue and speed range elements
+volumeRange.addEventListener("change", changeVolume);
+speedRange.addEventListener("change", changeSpeed);
+
+// Function to calculate the new volume and set it in the video
+function changeVolume(e) {
+    const volume = volumeRange.valueAsNumber / 100;
+
+    videoScreen.volume = volume;
+}
+
+// Function to calculate the new speed and set it in the video
+function changeSpeed(e) {
+    const speed = speedRange.valueAsNumber / 100;
+
+    videoScreen.playbackRate = speed;
+}
+
