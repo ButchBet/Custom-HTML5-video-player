@@ -1,18 +1,30 @@
 const videoContainer = document.getElementById("videoContainer");
+
 const videoControls = document.getElementById("videoControls");
+
 const pausePlayButton = document.getElementById("pausePlayButton");
+
 const videoScreen = document.getElementById("videoScreen");
+
 const volumeRange = document.getElementById("volumeRange");
+
 const speedRange = document.getElementById("speedRange");
-console.log(videoScreen ,speedRange)
+
+const skipLeft = document.getElementById("skipLeft");
+
+const skipRight = document.getElementById("skipRight");
+console.log(videoScreen,skipLeft);
 
 // Code to animate the show and hidde of the videoControls
 let id = null; // Interval used to show and hidde videoControls
+
 let checkMovement = false; // Boolean to check if the mouse is being moved or not 
+
 let hidde = null; // Timeout to hidde the videoControl
 
 // let pos = (-21); // This will help us to move the videoControls naturally
 let pos = null;// This will help us to move the videoControls naturally
+
 setBottomPosition();
 
 videoContainer.addEventListener("mouseenter", showControls);
@@ -115,8 +127,9 @@ function changeVideoStatus() {
     }
 }
 
-// Coude to add the change of the volume and speed correctly with the volue and speed range elements
+// Coude to add the change of the volume and speed correctly with the value and speed range elements
 volumeRange.addEventListener("change", changeVolume);
+
 speedRange.addEventListener("change", changeSpeed);
 
 // Function to calculate the new volume and set it in the video
@@ -133,3 +146,23 @@ function changeSpeed(e) {
     videoScreen.playbackRate = speed;
 }
 
+// Code to add the skip actions with each arrows
+skipLeft.addEventListener("click", skipToLeft);
+
+function skipToLeft() {
+    videoScreen.currentTime -= 10;
+
+    if(videoScreen.currentTime < 0) {
+        videoScreen.currentTime = 0;
+    }
+}
+
+skipRight.addEventListener("click", skipToRight);
+
+function skipToRight() {
+    videoScreen.currentTime += 10;
+
+    if(videoScreen.currentTime > videoScreen.duration) {
+        videoScreen.currentTime = videoScreen.duration;
+    }
+}
