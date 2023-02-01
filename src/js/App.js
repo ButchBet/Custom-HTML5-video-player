@@ -14,27 +14,15 @@ setBottomPosition();
 
 videoContainer.addEventListener("mouseenter", showControls);
 
-videoContainer.addEventListener("mousemove", (e) => {
-    if(checkMovement) {
-        clearTimeout(hidde);
-    
-        hidde = setTimeout(() => {
-            hiddeControls();
-
-            checkMovement = false;
-        }, 2000);
-    } else {
-        showControls();
-
-        checkMovement = true;
-    }
-});
+videoContainer.addEventListener("mousemove", checkMosueMovements);
 
 videoContainer.addEventListener("mouseleave", () => {
     clearTimeout(hidde);
     
     hiddeControls();
 });
+
+videoContainer.addEventListener("click", checkMosueMovements);
 
 window.addEventListener("resize", setBottomPosition);
 
@@ -78,25 +66,49 @@ function hiddeControls() {
 function setBottomPosition() {
     if(window.outerWidth < 599) {
         pos = (-37); 
+        
         videoControls.style.bottom = pos + "px";
     } else {
         pos = (-21); 
+
         videoControls.style.bottom = pos + "px";
+    }
+}
+
+// Function to check if the mosue has been moved or has been clicked
+function checkMosueMovements() {
+    if(checkMovement) {
+        clearTimeout(hidde);
+    
+        hidde = setTimeout(() => {
+            hiddeControls();
+
+            checkMovement = false;
+        }, 2000);
+    } else {
+        showControls();
+
+        checkMovement = true;
     }
 }
 
 // Code to add the pause and play event in the respective buttons and the space key
 pausePlayButton.addEventListener("click", changeVideoStatus);
 
+// Function to change the video status from pause to play and vice versa, also to change the src and alt attributes of the pausePlayButton
 function changeVideoStatus(e) {
     console.log(videoScreen);
     if(videoScreen.paused) {
         pausePlayButton.src = "./src/assets/pause.png";
+
         pausePlayButton.alt = "Pause button";
+        
         videoScreen.play();
     } else {
         pausePlayButton.src = "./src/assets/play.png";
+        
         pausePlayButton.alt = "Play button";
+        
         videoScreen.pause();
     }
 }
