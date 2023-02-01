@@ -13,7 +13,11 @@ const speedRange = document.getElementById("speedRange");
 const skipLeft = document.getElementById("skipLeft");
 
 const skipRight = document.getElementById("skipRight");
-console.log(videoScreen,skipLeft);
+
+const progressBar = document.getElementById("progressBar");
+
+const progressContent = document.getElementById("progressContent");
+console.log(videoScreen, progressBar, progressContent);
 
 // Code to animate the show and hidde of the videoControls
 let id = null; // Interval used to show and hidde videoControls
@@ -165,4 +169,11 @@ function skipToRight() {
     if(videoScreen.currentTime > videoScreen.duration) {
         videoScreen.currentTime = videoScreen.duration;
     }
+}
+
+// Code to go showing the video progress indicator 
+progressBar.addEventListener("click", calculateProgress);
+
+function calculateProgress(e) {
+    progressContent.style.width = e.layerX + "px";
 }

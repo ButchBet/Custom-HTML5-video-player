@@ -104,7 +104,7 @@ body {
 }
 
 .progressBar__progress {
-    width: 50%;
+    width: 10px;
 }
 
 .downControls {
