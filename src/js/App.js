@@ -1,5 +1,7 @@
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const pausePlayButton = document.getElementById("pausePlayButton");
+const videoScreen = document.getElementById("videoScreen");
 
 // Code to animate the show and hidde of the videoControls
 let id = null; // Interval used to show and hidde videoControls
@@ -38,7 +40,6 @@ window.addEventListener("resize", setBottomPosition);
 
 // Fucntion to how the videoControls slowly
 function showControls() {
-    console.log(pos)
     clearInterval(id);
 
     id = setInterval(frame, 1);
@@ -85,3 +86,17 @@ function setBottomPosition() {
 }
 
 // Code to add the pause and play event in the respective buttons and the space key
+pausePlayButton.addEventListener("click", changeVideoStatus);
+
+function changeVideoStatus(e) {
+    console.log(videoScreen);
+    if(videoScreen.paused) {
+        pausePlayButton.src = "./src/assets/pause.png";
+        pausePlayButton.alt = "Pause button";
+        videoScreen.play();
+    } else {
+        pausePlayButton.src = "./src/assets/play.png";
+        pausePlayButton.alt = "Play button";
+        videoScreen.pause();
+    }
+}
