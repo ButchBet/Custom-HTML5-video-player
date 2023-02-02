@@ -13,8 +13,8 @@
 In this project I will plan and code step by step the successful creation of a [custom html5 video player.](https://courses.wesbos.com/account/signin), this will be found in the JavaScript30 course.
 
 ### Screenshot
-![Desktop](./assets/desktop.png)
-![Mobile](./assets/mobile.png)
+![Desktop](./assets/desktop.jpg)
+![Mobile](./assets/mobile.jpg)
 
 ### Links
 - Solution URL: [GitHub](https://github.com/ButchBet/Custom-HTML5-video-player)
