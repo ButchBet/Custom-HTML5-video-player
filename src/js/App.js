@@ -73,9 +73,9 @@ function hiddeControls() {
     show = setInterval(frame, 1);
 
     function frame() {
-        if(position == -37) {
+        if(position == -78) {
             clearInterval(show);
-        } else if(position == -21 && window.outerWidth >= 599) {
+        } else if(position == -40 && window.outerWidth >= 599) {
             clearInterval(show);
         } else {
             position--;
@@ -87,11 +87,11 @@ function hiddeControls() {
 
 function updateBottomPosition() {
     if(window.outerWidth < 599) {
-        position = (-37); 
+        position = (-78); 
         
         videoControls.style.bottom = position + "px";
     } else {
-        position = (-21); 
+        position = (-40); 
 
         videoControls.style.bottom = position + "px";
     }

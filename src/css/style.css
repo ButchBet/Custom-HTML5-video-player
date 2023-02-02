@@ -71,9 +71,7 @@ body {
 .volumeSpeed__speed,
 .skipConainer,
 .progressBar,
-.videoControls,
-.progressBar__progress::-webkit-slider-runnable-track,
-.progressBar__progress::-moz-range-track {
+.videoControls {
     width: 100%;
 }
 
@@ -85,9 +83,7 @@ body {
 .volumeSpeed__volume,
 .volumeSpeed__speed,
 .skipConainer,
-.progressBar__progress,
-.progressBar__progress::-webkit-slider-runnable-track,
-.progressBar__progress::-moz-range-track {
+.progressBar__progress {
     height: 100%;
 }
 
@@ -123,27 +119,6 @@ body {
     bottom: -21px;
 }
 
-.progressBar__progress::-moz-range-thumb {
-    height: 0;
-    width: 0;
-    border: 0;
-}
-
-
-.progressBar__progress::-ms-thumb {
-    height: 0px;
-    width: 0px;
-    border: 0;
-}
-
-.progressBar__progress::-ms-track {
-    width: 100%;
-}
-
-.progressBar__progress::-ms-track {
-    height: 100%;
-}
-
 /* Typography */
 
 /* Visual */
@@ -154,14 +129,14 @@ body {
     filter: invert(100%) sepia(91%) saturate(1572%) hue-rotate(329deg) brightness(95%) contrast(106%);
 }
 
-.progressBar__progress::-webkit-slider-runnable-track,
-.progressBar__progress::-moz-range-track {
-    background: var(--main-background);
-}
 
 .volumeSpeed__volume,
 .volumeSpeed__speed {
     background: transparent;
+}
+
+.progressBar__progress {
+    background: var(--main-background);
 }
 
 /* Other */
@@ -177,59 +152,98 @@ body {
     cursor: pointer;
 }
 
-.videoControls { 
-    animation-duration: 2s;
+input[type=range] {
+    height: 17px;
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
 }
-
-.volumeSpeed__volume::-webkit-slider-runnable-track,
-.volumeSpeed__speed::-webkit-slider-runnable-track {
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 7px;
     cursor: pointer;
-    background: var(--secondary-background);
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #F0DB4F;
+    border-radius: 0px;
+    border: 0px solid #010101;
 }
-
-.volumeSpeed__volume::-webkit-slider-thumb,
-.volumeSpeed__speed::-webkit-slider-thumb {
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 0px 0px 0px #000031;
+    border: 0px solid #00001E;
     height: 11px;
     width: 11px;
-    border-radius: 49px;
-    background: var(--main-background);
+    border-radius: 50px;
+    background: #FFFFFF;
     cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -2px;
 }
-
-.volumeSpeed__volume::-moz-range-track,
-.volumeSpeed__speed::-moz-range-track {
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #F0DB4F;
+}
+input[type=range]::-moz-range-track {
     width: 100%;
     height: 7px;
     cursor: pointer;
-    background: var(--secondary-background);
+    animate: 0.2s;
+    box-shadow: 0px 0px 0px #000000;
+    background: #F0DB4F;
+    border-radius: 0px;
+    border: 0px solid #010101;
 }
-.volumeSpeed__volume::-moz-range-thumb,
-.volumeSpeed__speed::-moz-range-thumb {
+input[type=range]::-moz-range-thumb {
+    box-shadow: 0px 0px 0px #000031;
+    border: 0px solid #00001E;
     height: 11px;
     width: 11px;
-    border: 0;
-    border-radius: 49px;
-    background: var(--main-background);
+    border-radius: 50px;
+    background: #FFFFFF;
     cursor: pointer;
 }
-.volumeSpeed__volume::-ms-track,
-.volumeSpeed__speed::-ms-track {
+input[type=range]::-ms-track {
     width: 100%;
     height: 7px;
     cursor: pointer;
-    background: var(--secondary-background);
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
 }
-
-.volumeSpeed__volume::-ms-thumb,
-.volumeSpeed__speed::-ms-thumb {
+input[type=range]::-ms-fill-lower {
+    background: #F0DB4F;
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-fill-upper {
+    background: #F0DB4F;
+    border: 0px solid #010101;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px #000000;
+}
+input[type=range]::-ms-thumb {
+    margin-top: 1px;
+    box-shadow: 0px 0px 0px #000031;
+    border: 0px solid #00001E;
     height: 11px;
     width: 11px;
-    border-radius: 49px;
-    background: var(--main-background);
+    border-radius: 50px;
+    background: #FFFFFF;
     cursor: pointer;
 }
+input[type=range]:focus::-ms-fill-lower {
+    background: #F0DB4F;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #F0DB4F;
+}
+
+
+  
 .videoContainer {
     overflow: hidden;
 }
