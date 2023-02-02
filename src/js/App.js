@@ -17,20 +17,22 @@ const skipRight = document.getElementById("skipRight");
 const progressBar = document.getElementById("progressBar");
 
 const progressContent = document.getElementById("progressContent");
-console.log(videoScreen, progressBar, progressContent);
 
-// Code to animate the show and hidde of the videoControls
-let id = null; // Interval used to show and hidde videoControls
+let show = null; // Interval used to show and hidde videoControls
 
-let checkMovement = false; // Boolean to check if the mouse is being moved or not 
+let checkMovement = false; // Boolean to check if the mouse is being moved 
 
 let hidde = null; // Timeout to hidde the videoControl
 
-// let pos = (-21); // This will help us to move the videoControls naturally
-let pos = null;// This will help us to move the videoControls naturally
+let position = null;// This will help us to move the videoControls naturally
 
-setBottomPosition();
+let rate = null; // This will help us to calculate how many seconds of the videoScreen ar represented in progressBar pixels and vice versa
 
+updateBottomPosition();
+
+updateProgressContent(videoScreen.currentTime * rate);
+
+// Code to animate the show and hidde of the videoControls
 videoContainer.addEventListener("mouseenter", showControls);
 
 videoContainer.addEventListener("mousemove", checkMosueMovements);
@@ -43,58 +45,60 @@ videoContainer.addEventListener("mouseleave", () => {
 
 videoContainer.addEventListener("click", checkMosueMovements);
 
-window.addEventListener("resize", setBottomPosition);
+window.addEventListener("resize", () => {
+    updateRate();
 
-// Fucntion to how the videoControls slowly
+    updateBottomPosition()
+});
+
 function showControls() {
-    clearInterval(id);
+    clearInterval(show);
 
-    id = setInterval(frame, 1);
+    show = setInterval(frame, 1);
 
     function frame(){
-        if(pos == 8) {
-            clearInterval(id);
+        if(position == 8) {
+            clearInterval(show);
         } else {
-            pos++;
+            position++;
 
-            videoControls.style.bottom = pos + "px";
+            videoControls.style.bottom = position + "px";
         }
     }
 }
 
-// Function to hidde the videoControls slowly
 function hiddeControls() {
-    clearInterval(id);
+    clearInterval(show);
 
-    id = setInterval(frame, 1);
+    show = setInterval(frame, 1);
 
     function frame() {
-        if(pos == -37) {
-            clearInterval(id);
-        } else if(pos == -21 && window.outerWidth >= 599) {
-            clearInterval(id);
+        if(position == -37) {
+            clearInterval(show);
+        } else if(position == -21 && window.outerWidth >= 599) {
+            clearInterval(show);
         } else {
-            pos--;
+            position--;
             
-            videoControls.style.bottom = pos + "px";
+            videoControls.style.bottom = position + "px";
         }
     }
 }
 
-// Function to set bottom position when the width of the window changes
-function setBottomPosition() {
+function updateBottomPosition() {
     if(window.outerWidth < 599) {
-        pos = (-37); 
+        position = (-37); 
         
-        videoControls.style.bottom = pos + "px";
+        videoControls.style.bottom = position + "px";
     } else {
-        pos = (-21); 
+        position = (-21); 
 
-        videoControls.style.bottom = pos + "px";
+        videoControls.style.bottom = position + "px";
     }
+
+    updateRate();
 }
 
-// Function to check if the mosue has been moved or has been clicked
 function checkMosueMovements() {
     if(checkMovement) {
         clearTimeout(hidde);
@@ -111,11 +115,12 @@ function checkMosueMovements() {
     }
 }
 
-// Code to add the pause and play event in the respective buttons and the space key
-pausePlayButton.addEventListener("click", changeVideoStatus);
+// Code to add the pause and play event in the respective buttons 
+pausePlayButton.addEventListener("click", updateVideoStatus);
 
-// Function to change the video status from pause to play and vice versa, also to change the src and alt attributes of the pausePlayButton
-function changeVideoStatus() {
+videoScreen.addEventListener("click", updateVideoStatus);
+
+function updateVideoStatus() {
     if(videoScreen.paused) {
         pausePlayButton.src = "./src/assets/pause.png";
 
@@ -131,20 +136,18 @@ function changeVideoStatus() {
     }
 }
 
-// Coude to add the change of the volume and speed correctly with the value and speed range elements
-volumeRange.addEventListener("change", changeVolume);
+// Code to add the change of the volume and speed correctly with the value and speed range elements
+volumeRange.addEventListener("change", updateVolume);
 
-speedRange.addEventListener("change", changeSpeed);
+speedRange.addEventListener("change", updateSpeed);
 
-// Function to calculate the new volume and set it in the video
-function changeVolume(e) {
+function updateVolume(e) {
     const volume = volumeRange.valueAsNumber / 100;
 
     videoScreen.volume = volume;
 }
 
-// Function to calculate the new speed and set it in the video
-function changeSpeed(e) {
+function updateSpeed(e) {
     const speed = speedRange.valueAsNumber / 100;
 
     videoScreen.playbackRate = speed;
@@ -153,6 +156,8 @@ function changeSpeed(e) {
 // Code to add the skip actions with each arrows
 skipLeft.addEventListener("click", skipToLeft);
 
+skipRight.addEventListener("click", skipToRight);
+
 function skipToLeft() {
     videoScreen.currentTime -= 10;
 
@@ -160,8 +165,6 @@ function skipToLeft() {
         videoScreen.currentTime = 0;
     }
 }
-
-skipRight.addEventListener("click", skipToRight);
 
 function skipToRight() {
     videoScreen.currentTime += 10;
@@ -172,8 +175,24 @@ function skipToRight() {
 }
 
 // Code to go showing the video progress indicator 
-progressBar.addEventListener("click", calculateProgress);
+progressBar.addEventListener("click", (e) => {
+    updateCurrentTime(e.layerX / rate);
 
-function calculateProgress(e) {
-    progressContent.style.width = e.layerX + "px";
+    updateProgressContent(e.layerX);
+});
+
+videoScreen.addEventListener("timeupdate", (e) => {
+    updateProgressContent(e.target.currentTime * rate);
+})
+
+function updateCurrentTime(currentTime) {
+    videoScreen.currentTime = currentTime;
+}
+
+function updateRate() {
+    rate = progressBar.clientWidth / videoScreen.duration;
+}
+
+function updateProgressContent(progress) {
+    progressContent.style.width =  progress + "px";
 }
