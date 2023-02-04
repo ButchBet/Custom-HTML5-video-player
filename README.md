@@ -18,7 +18,7 @@ In this project I will plan and code step by step the successful creation of a [
 
 ### Links
 - Solution URL: [GitHub](https://github.com/ButchBet/Custom-HTML5-video-player)
-- Live Site URL: [CS5VP]()
+- Live Site URL: [CS5VP](https://hch5vp.netlify.app/)
 
 ### Built with
 - Semantic HTML5 markup
